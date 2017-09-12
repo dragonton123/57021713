@@ -4,6 +4,15 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Calculator from './Components/Calculator';
+
+
+import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router'
+import { Showhomework,Homework,Home, BasicRouting, Blocking, Miss, QueryParams, Recursive, Login, ProtectedPage, CounterPage, FetchPage } from './Components'
+import fakeAuth from './Auth'
+import routes from './routing-config'
+import { NoMatch } from './Components';
+
 class App extends Component {
     getVal(){
         var a = "get val";
@@ -37,48 +46,48 @@ class App extends Component {
       ];
       const myname = "Tossaphorn";
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-          <p>
-              lnwza007
-          </p>
-          <div>
-              KUY{this.name}
-              {myname}
-          </div>
-          <div>
-              cal : {445+123}
-          </div>
-          <div>
-              call function {(() => {return 1234})()}
-          </div>
-          <div>
-              {this.getVal()}
-          </div>
-          <div>
-              {list}
-          </div>
-          <Footer />
-          <div>
-             Name: {this.state.name} Age:{this.state.age}
-              <button onClick={this.onClick.bind(this)}> Change name</button>
-
-            <input onChange={this.setAge.bind(this)}/>
-          </div>
-          <div>
-              <Header title={this.state.name} />
-          </div>
-
-          <Calculator/>
-
-
-      </div>
+        <BrowserRouter>
+            <div className="App">
+                <div className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <ul>
+                        <li><NavLink to="/" activeClassName="active">Home</NavLink></li>
+                        <li><NavLink to="/BasicRouting" activeClassName="active">Basic Routing</NavLink></li>
+                        <li><NavLink to="/Blocking" activeClassName="active">Blocking</NavLink></li>
+                        <li><NavLink to="/Miss" activeClassName="active">Miss</NavLink></li>
+                        <li><NavLink to="/QueryParams" activeClassName="active">Query params</NavLink></li>
+                        <li><NavLink to="/Recursive" activeClassName="active">Recursive</NavLink></li>
+                        <li><NavLink to="/Protected" activeClassName="active">Protected</NavLink></li>
+                        <li><NavLink to="/Counter" activeClassName="active">Counter</NavLink></li>
+                        <li><NavLink to="/Fetch" activeClassName="active">Fetch</NavLink></li>
+                        <li><NavLink to="/Homework" activeClassName="active">Homework</NavLink></li>
+                    </ul>
+                </div>
+                <div className="App-intro">
+                    <Switch>
+                        {
+                            <div>
+                                <Route path="/" component={Home} exact={true} />
+                                <Route path="/BasicRouting" component={BasicRouting} />
+                                <Route path="/Blocking" component={Blocking} />
+                                <Route path="/Miss" component={Miss} />
+                                <Route path="/QueryParams" component={QueryParams} />
+                                <Route path="/Recursive" component={Recursive} />
+                                <Route path="/login" component={Login} />
+                                <Route path="/Homework" component={Homework} />
+                                <Route path="/Showhomework" component={Showhomework} />
+                                <Route path="/Protected" component={
+                                    () => (fakeAuth.isAuthenticated ?
+                                        (<ProtectedPage />) :
+                                        (<Redirect to={{pathname: "/login", state: {from: "/Protected"}}}/> ))} />
+                            </div>
+                        }
+                        {/*routes.map((route,index) => (<Route key={index} path={route.path} component={route.component} exact={route.exact} />))*/}
+                        <Route component={NoMatch} />
+                    </Switch>
+                </div>
+            </div>
+        </BrowserRouter>
     );
   }
 
