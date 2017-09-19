@@ -8,7 +8,7 @@ import Calculator from './Components/Calculator';
 
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router'
-import { Showhomework,Homework,Home, BasicRouting, Blocking, Miss, QueryParams, Recursive, Login, ProtectedPage, CounterPage, FetchPage } from './Components'
+import { Counthomework,Showhomework,Homework,Home, BasicRouting, Blocking, Miss, QueryParams, Recursive, Login, ProtectedPage, CounterPage, FetchPage } from './Components'
 import fakeAuth from './Auth'
 import routes from './routing-config'
 import { NoMatch } from './Components';
@@ -58,9 +58,9 @@ class App extends Component {
                         <li><NavLink to="/QueryParams" activeClassName="active">Query params</NavLink></li>
                         <li><NavLink to="/Recursive" activeClassName="active">Recursive</NavLink></li>
                         <li><NavLink to="/Protected" activeClassName="active">Protected</NavLink></li>
-                        <li><NavLink to="/Counter" activeClassName="active">Counter</NavLink></li>
-                        <li><NavLink to="/Fetch" activeClassName="active">Fetch</NavLink></li>
                         <li><NavLink to="/Homework" activeClassName="active">Homework</NavLink></li>
+                        <li><NavLink to="/Counter" activeClassName="active">Counter</NavLink></li>
+                        <li><NavLink to="/CountHomework" activeClassName="active">CountHomework</NavLink></li>
                     </ul>
                 </div>
                 <div className="App-intro">
@@ -75,7 +75,9 @@ class App extends Component {
                                 <Route path="/Recursive" component={Recursive} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/Homework" component={Homework} />
+                                <Route path="/Counter" component={CounterPage} />
                                 <Route path="/Showhomework" component={Showhomework} />
+                                <Route path="/Counthomework" component={Counthomework} />
                                 <Route path="/Protected" component={
                                     () => (fakeAuth.isAuthenticated ?
                                         (<ProtectedPage />) :

@@ -10,3 +10,5 @@ export {default as Login} from './Login.component';
 export {default as ProtectedPage } from './ProtectedPage.component';
 export {default as Homework} from './homework';
 export {default as Showhomework} from './Showhomework';
+export {default as CounterPage} from './Counter.components';
+export {default as Counthomework} from './Counthomework';
